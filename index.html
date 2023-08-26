@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dados de APIs</title>
+</head>
+<body>
+    <h1 id="data-viacep"></h1>
+    <h1 id="data-randomuser"></h1>
+    <h1 id="data-ipinfo"></h1>
+
+    <script>
+        // Chamada para a API ViaCEP
+        fetch('https://viacep.com.br/ws/01001000/json/')
+            .then(response => response.json())
+            .then(data => {
+                const h1 = document.getElementById('data-viacep');
+                h1.textContent = 'ViaCEP: ' + data.logradouro + ', ' + data.bairro + ', ' + data.localidade + ' - ' + data.uf;
+            })
+            .catch(error => {
+                console.error('Erro ao buscar os dados do ViaCEP:', error);
+            });
+
+        // Chamada para a API RandomUser
+        fetch('https://randomuser.me/api/')
+            .then(response => response.json())
+            .then(data => {
+                const user = data.results[0];
+                const h1 = document.getElementById('data-randomuser');
+                h1.textContent = 'RandomUser: ' + user.name.first + ' ' + user.name.last + ' - ' + user.email;
+            })
+            .catch(error => {
+                console.error('Erro ao buscar os dados do RandomUser:', error);
+            });
+
+        // Chamada para a API ipinfo
+        fetch('https://ipinfo.io/json/')
+            .then(response => response.json())
+            .then(data => {
+                const h1 = document.getElementById('data-ipinfo');
+                h1.textContent = 'IPInfo: ' + data.ip + ' - ' + data.city + ', ' + data.region + ', ' + data.country;
+            })
+            .catch(error => {
+                console.error('Erro ao buscar os dados do IPInfo:', error);
+            });
+    </script>
+</body>
+</html>
